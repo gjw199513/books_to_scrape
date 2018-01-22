@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-
+from ..items import BooksItem
 
 class BooksSpider(scrapy.Spider):
     # 爬虫名
@@ -17,9 +17,15 @@ class BooksSpider(scrapy.Spider):
             price = sel.css('p.price_color::text').extract_first()
             rating = sel.css('p.star-rating').re_first('star-rating (\w+)')
 
-            book = {'name': name,
-                    'price': price,
-                    'rating': rating}
+            # book = {'name': name,
+            #         'price': price,
+            #         'rating': rating}
+            # 使用item来完善数据
+            book = BooksItem()
+            book['name'] = name
+            book['price'] = price
+            book['rating'] = rating
+
             yield book
         # 2.提取链接，产生新的请求
         url = response.css('ul.pager li.next a::attr(href)').extract_first()
