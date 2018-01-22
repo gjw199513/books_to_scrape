@@ -24,6 +24,7 @@ class BooksSpider(scrapy.Spider):
         # 2.提取链接，产生新的请求
         url = response.css('ul.pager li.next a::attr(href)').extract_first()
         if url:
+            # 合并url
             url = response.urljoin(url)
             request = scrapy.Request(url, self.parse)
             yield request
