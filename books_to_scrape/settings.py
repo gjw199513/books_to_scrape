@@ -74,6 +74,9 @@ ITEM_PIPELINES = {
 }
 
 RATING_FILTER_LEVEL = 4
+
+# 实现excel导出
+FEED_EXPORTERS = {'excel': 'books_to_scrape.exporters.ExcelItemExporter'}
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
 # AUTOTHROTTLE_ENABLED = True
